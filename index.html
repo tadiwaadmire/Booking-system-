@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Booking System</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #f0f0f0;
+    }
+
+    /* Main Booking Form Container */
+    .booking-container {
+      background: #fff;
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    label {
+      margin-bottom: 0.5rem;
+      color: #555;
+      font-weight: bold;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .submit-btn {
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: #0056b3;
+    }
+
+    /* Confirmation Message */
+    .confirmation {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #e7f7e1;
+      color: #2d6a4f;
+      border: 1px solid #2d6a4f;
+      border-radius: 5px;
+      display: none;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .booking-container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="booking-container">
+    <h1>Book a Table</h1>
+    
+    <div class="input-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Your Name" required>
+    </div>
+
+    <div class="input-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Your Email" required>
+    </div>
+
+    <div class="input-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="Your Phone Number" required>
+    </div>
+
+    <div class="input-group">
+      <label for="date">Date</label>
+      <input type="date" id="date" required>
+    </div>
+
+    <div class="input-group">
+      <label for="time">Time</label>
+      <input type="time" id="time" required>
+    </div>
+
+    <div class="input-group">
+      <label for="guests">Number of Guests</label>
+      <select id="guests" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+    </div>
+
+    <button class="submit-btn" onclick="bookTable()">Book Now</button>
+
+    <div class="confirmation" id="confirmation">
+      <p>Thank you, <span id="userName"></span>! Your table for <span id="numGuests"></span> is booked on <span id="bookDate"></span> at <span id="bookTime"></span>. A confirmation email has been sent to <span id="userEmail"></span>.</p>
+    </div>
+  </div>
+
+  <script>
+    function bookTable() {
+      // Get input values
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const guests = document.getElementById("guests").value;
+
+      // Validate inputs
+      if (!name || !email || !phone || !date || !time || !guests) {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      // Show confirmation message with user input
+      document.getElementById("userName").innerText = name;
+      document.getElementById("userEmail").innerText = email;
+      document.getElementById("numGuests").innerText = guests;
+      document.getElementById("bookDate").innerText = date;
+      document.getElementById("bookTime").innerText = time;
+      document.getElementById("confirmation").style.display = "block";
+
+      // Clear the form fields
+      document.getElementById("name").value = '';
+      document.getElementById("email").value = '';
+      document.getElementById("phone").value = '';
+      document.getElementById("date").value = '';
+      document.getElementById("time").value = '';
+      document.getElementById("guests").value = '1';
+    }
+  </script>
+</body>
+</html>
